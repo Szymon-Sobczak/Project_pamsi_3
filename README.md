@@ -3,19 +3,10 @@
  * Następnie należy użyć Makefile poleceniem `make`, aby skompilować program po wcześniejszym poprawnym stworzeniu pliku `Makefile` z pomocą cmake w katalogu `build/`. 
  * Po poprawnym skompilowaniu, aby uruchomić program, należy użyć polecenia `./main` w katalogu `build/`.
 
-## Uruchamianie Testów Programu
- * Testy jednostkowe programu uruchamiają się po wpisaniu do terminala `./unit_tests` po poprawnej kompilacji z użyciem pliku Makefile w katalogu `build/`.
-
-## Generowanie dokumentacji w Doxygen
- * Aby wygenerować pliki dokumentacji Doxygen, w postaci HTML, należy skorzystać z pliku konfiguracyjnego `Doxyfile.in` znajdującego się w głównym katalogu repozytorum. Aby to zrobić, należy skorzystać z polecenia `doxygen Doxyfile.in` w głównym katalogu repozytorium. Wygenerowane pliki będą znajdowały się w katalogu `dox/`. Do wygenerowania dokumentacji można również skorzystać z kreatora doxywizard lub cmake poleceniem `doxygen` w katalogu `build/`. 
-
-## Wcześniej wygenerowana dokumentacja
- * Repozytorum posiada wcześniej wygenerowane najaktualniejsze pliki dokumentacji w katalogu `dox/`. Aby uruchomić stronę główną dokumetnacji należy uruchomić plik `./dox/html/index.html`
-
 ## Building
 Build by making a build directory (i.e. `build/`), run `cmake` in that dir, and then use `make` to build the desired target.
 
-Requirements: cmake, gnuplot, doxygen + dot
+Requirements: cmake
 
 Example:
 
