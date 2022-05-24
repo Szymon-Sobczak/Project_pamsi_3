@@ -12,4 +12,6 @@ class Board{
         Board(unsigned int NewSize);
         void PutChar(unsigned int i,unsigned int j, char symbol);
         void PrintState();
+        bool IsSpaceAvailable();
+        int EvaluateMove();
 };
