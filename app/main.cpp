@@ -4,9 +4,10 @@
  
 
 int main(){
-   unsigned int game_size = 4;
-   // unsigned int Col, Row;
-     unsigned int Col;
+   unsigned int game_size = 3;
+   unsigned int Col, Row;
+   std::pair<int, int> ai_move = {0,0};
+     //unsigned int Col;
    system("clear"); 
    // std::cout << "!!!   WELCOME TO THE GAME   !!!" << std::endl;
    // std::cout  <<" _____ ___ ___   _____ _   ___   _____ ___  ___ " << std::endl
@@ -34,30 +35,35 @@ int main(){
    //    }
    // } 
    Board TicTacToe = Board(game_size);
-   system("clear");
+  // system("clear");
    std::cout << "Let the game begin! You play X and the AI plays O." << std::endl;
    while (1){
       try{
+         std::cout << "AI: " << ai_move.first << " " << ai_move.second << std::endl;
          std::cout << "Sprawdzam: " << TicTacToe.EvaluateMove() << std::endl;
-
          TicTacToe.PrintState();
-         // std::cout << "Enter positon Row, Col >>> ";
-         std::cin >> Col;
-         // if(std::cin.fail())
-         //    throw std::invalid_argument("Typing error, please try again.");
-         //TicTacToe.PutChar(Col, Row, 'X');
-         if(Col == 1){
-             TicTacToe.PutChar(2, 0, 'X');
-         TicTacToe.PutChar(1, 1, 'X');
-         TicTacToe.PutChar(0, 2, 'X');
-        // TicTacToe.PutChar(2, 1, 'O');
-         }
+         std::cout << "Enter positon Row, Col >>> ";
+         std::cin >> Col >> Row;
+         if(std::cin.fail())
+            throw std::invalid_argument("Typing error, please try again.");
+         TicTacToe.PutChar(Col, Row, 'X');
+         ai_move = TicTacToe.FindBestMove();
+         std::cout << "AI: " << ai_move.first << " " << ai_move.second << std::endl;
+         TicTacToe.PutChar(ai_move.first, ai_move.second, 'O');
+
+         
+         // if(Col == 1){
+         //    TicTacToe.PutChar(3, 0, 'X');
+         //    TicTacToe.PutChar(2, 1, 'X');
+         //    TicTacToe.PutChar(1, 2, 'X');
+         //    TicTacToe.PutChar(0, 3, 'X');
+         // }
         
            //TicTacToe.PrintState();;
          //system("clear");
       }
       catch (std::invalid_argument & e){
-         system("clear");
+         //system("clear");
          std::cin.clear();
          std::cin.ignore(10000,'\n');
          std::cerr << "! An error has occurred: " << std::endl << e.what() << std::endl;
