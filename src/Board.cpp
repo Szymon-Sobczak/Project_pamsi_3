@@ -57,9 +57,9 @@ int Board::EvaluateMove(){
                 test = false;
         }
         if (test == true && (board_state[i][0] == 'X'))
-            return 10;
-        if (test == true && (board_state[i][0] == 'O'))
             return -10;
+        if (test == true && (board_state[i][0] == 'O'))
+            return 10;
         test = true;
     }
     
@@ -70,9 +70,9 @@ int Board::EvaluateMove(){
                 test = false;
         }
         if (test == true && (board_state[0][i] == 'X'))
-            return 10;
-        if (test == true && (board_state[0][i] == 'O'))
             return -10;
+        if (test == true && (board_state[0][i] == 'O'))
+            return 10;
         test = true;
     }
     
@@ -82,9 +82,9 @@ int Board::EvaluateMove(){
                 test = false;
         }
     if (test == true && (board_state[0][0] == 'X'))
-        return 10;
-    if (test == true && (board_state[0][0] == 'O'))
         return -10;
+    if (test == true && (board_state[0][0] == 'O'))
+        return 10;
     test = true;
 
     /* Sprawdzanie przeciwprzekątnej */
@@ -93,9 +93,9 @@ int Board::EvaluateMove(){
             test = false;
     }
     if (test == true && (board_state[0][Size-1] == 'X'))
-        return 10;
-    if (test == true && (board_state[0][Size - 1] == 'O'))
         return -10;
+    if (test == true && (board_state[0][Size - 1] == 'O'))
+        return 10;
     test = true;
 
     return 0;
@@ -118,7 +118,7 @@ int Board::MinMax(int depth, bool isMax){
             for(unsigned int i = 0; i < Size; ++i){
                 for (unsigned int j = 0; j < Size; ++j)
                     if(board_state[i][j] == ' '){
-                        board_state[i][j] = 'X';
+                        board_state[i][j] = 'O';
                         best = std::max(best, MinMax(depth+1, !isMax));
                         board_state[i][j] = ' ';
                     }
@@ -130,7 +130,7 @@ int Board::MinMax(int depth, bool isMax){
             for(unsigned int i = 0; i < Size; ++i){
                 for (unsigned int j = 0; j < Size; ++j)
                     if(board_state[i][j] == ' '){
-                        board_state[i][j] = 'O';
+                        board_state[i][j] = 'X';
                         best = std::min(best, MinMax(depth+1, !isMax));
                         board_state[i][j] = ' ';
                     }
