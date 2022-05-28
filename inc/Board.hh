@@ -15,5 +15,6 @@ class Board{
         bool IsSpaceAvailable();
         int EvaluateMove();
         int MinMax(int depth, bool isMax);     
+        int MinMaxAlfaBeta(int depth, bool isMax, int alpha, int beta);  
         std::pair<int,int> FindBestMove();
 };

@@ -4,7 +4,7 @@
  
 
 int main(){
-   unsigned int game_size = 3;
+   unsigned int game_size = 4;
    unsigned int Col, Row;
    std::pair<int, int> ai_move = {0,0};
      //unsigned int Col;
@@ -51,15 +51,7 @@ int main(){
          std::cout << "AI: " << ai_move.first << " " << ai_move.second << std::endl;
          TicTacToe.PutChar(ai_move.first, ai_move.second, 'O');
 
-         
-         // if(Col == 1){
-         //    TicTacToe.PutChar(3, 0, 'X');
-         //    TicTacToe.PutChar(2, 1, 'X');
-         //    TicTacToe.PutChar(1, 2, 'X');
-         //    TicTacToe.PutChar(0, 3, 'X');
-         // }
-        
-           //TicTacToe.PrintState();;
+         //TicTacToe.PrintState();;
          //system("clear");
       }
       catch (std::invalid_argument & e){

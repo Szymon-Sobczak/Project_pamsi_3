@@ -139,6 +139,67 @@ int Board::MinMax(int depth, bool isMax){
     }
 }
 
+int Board::MinMaxAlfaBeta(int depth, bool isMax, int alpha, int beta){
+    int score = EvaluateMove();
+    
+    if(depth == 14 - int(Size)){
+        if (isMax)
+            return score - depth;
+        if (!isMax)
+            return score + depth; 
+        if(IsSpaceAvailable() == false)
+            return 0; 
+    }
+
+    if (score == 10)
+        return score - depth;
+    if (score == -10)
+        return score + depth; 
+    if(IsSpaceAvailable() == false)
+        return 0; 
+
+    if (isMax){
+        int best = -1000;
+            for(unsigned int i = 0; i < Size; ++i){
+                for (unsigned int j = 0; j < Size; ++j)
+                    if(board_state[i][j] == ' '){
+                        board_state[i][j] = 'O';
+                        
+                        int val = MinMaxAlfaBeta(depth + 1, false, alpha, beta);
+                        best = std::max(best, val);
+                        alpha = std::max(alpha, best);
+
+                        board_state[i][j] = ' ';
+                        
+                        if (alpha >= beta)
+                            break;
+                    }
+                if (alpha >= beta)
+                    break;
+            }
+        return best;
+    }
+    else{
+        int best = 1000;
+            for(unsigned int i = 0; i < Size; ++i){
+                for (unsigned int j = 0; j < Size; ++j)
+                    if(board_state[i][j] == ' '){
+                        board_state[i][j] = 'X';
+                        int val = MinMaxAlfaBeta(depth + 1, true, alpha, beta);
+                        best = std::min(best, val);
+                        beta = std::min(beta, best);
+                        
+                        board_state[i][j] = ' ';
+                        if (alpha >= beta)
+                            break;
+                    }
+                if (alpha >= beta)
+                    break;
+            }
+        return best;
+    }
+}
+
 std::pair<int, int> Board::FindBestMove(){
     int best_val = -100;
     int move_val = -100;
@@ -147,8 +208,7 @@ std::pair<int, int> Board::FindBestMove(){
         for(unsigned int j = 0; j < Size; ++j){
             if (board_state[i][j] == ' '){
                 board_state[i][j] = 'O';
-                move_val = MinMax(0, false);
-                std::cout << "MOVE VAL: " << move_val <<std::endl;
+                move_val = MinMaxAlfaBeta(0, false, -1000, 1000);
                 board_state[i][j] = ' ';
             }
             if (move_val > best_val){
@@ -157,6 +217,5 @@ std::pair<int, int> Board::FindBestMove(){
             }
         }
     }
-    std::cout << "AI w metodzie: " << best_move.first << " " << best_move.second <<std::endl;
     return best_move;
 }
