@@ -6,10 +6,10 @@
 #include <bits/stdc++.h>
 
 class Board{
-    unsigned int Size;
+    unsigned int Size, streak;
     char ** board_state;
     public: 
-        Board(unsigned int NewSize);
+        Board(unsigned int NewSize, unsigned int new_streak);
         void PutChar(unsigned int i,unsigned int j, char symbol);
         void PrintState();
         bool IsSpaceAvailable();

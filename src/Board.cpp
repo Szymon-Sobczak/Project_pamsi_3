@@ -1,6 +1,6 @@
 #include "Board.hh"
 
-Board::Board(unsigned int NewSize) : Size(NewSize){
+Board::Board(unsigned int NewSize, unsigned int new_streak) : Size(NewSize), streak(new_streak){
     board_state = new char*[Size];
     for (unsigned int i = 0; i < Size; ++i)
         board_state[i] = new char[Size];
@@ -51,52 +51,61 @@ int Board::EvaluateMove(){
     bool test = true;
     
     /* Sprawdzanie wierszy */
-    for (unsigned int i = 0; i < Size; ++i){
-        for (unsigned int j = 0; j < Size - 1; ++j){
-            if(board_state[i][j] != board_state[i][j+1])
-                test = false;
+    for(unsigned k = 0; k < (Size - streak + 1); ++k){
+        for (unsigned int i = 0; i < Size; ++i){
+            for (unsigned int j = 0; j < streak - 1; ++j){
+                if(board_state[i][j+k] != board_state[i][j+k+1])
+                    test = false;
+            }
+            if (test == true && (board_state[i][k] == 'X'))
+                return -10;
+            if (test == true && (board_state[i][k] == 'O'))
+                return 10;
+            test = true;
         }
-        if (test == true && (board_state[i][0] == 'X'))
-            return -10;
-        if (test == true && (board_state[i][0] == 'O'))
-            return 10;
-        test = true;
     }
     
     /* Sprawdzanie kolumn */
-    for (unsigned int i = 0; i < Size; ++i){
-        for (unsigned int j = 0; j < Size - 1; ++j){
-            if(board_state[j][i] != board_state[j+1][i])
-                test = false;
+    for(unsigned k = 0; k < (Size - streak + 1); ++k){
+        for (unsigned int i = 0; i < Size; ++i){
+            for (unsigned int j = 0; j < streak - 1; ++j){
+                if(board_state[j+k][i] != board_state[j+k+1][i])
+                    test = false;
+            }
+            if (test == true && (board_state[k][i] == 'X'))
+                return -10;
+            if (test == true && (board_state[k][i] == 'O'))
+                return 10;
+            test = true;
         }
-        if (test == true && (board_state[0][i] == 'X'))
+    }
+    /* Sprawdzanie przekątnej */
+    for(unsigned k = 0; k < (Size - streak + 1); ++k){
+        for (unsigned int i = 0; i < streak - 1; ++i){
+                if(board_state[i+k][i+k] != board_state[i+1+k][i+1+k])
+                    test = false;
+            }
+        if (test == true && (board_state[k][k] == 'X'))
             return -10;
-        if (test == true && (board_state[0][i] == 'O'))
+        if (test == true && (board_state[k][k] == 'O'))
             return 10;
         test = true;
     }
-    
-    /* Sprawdzanie przekątnej */
-    for (unsigned int i = 0; i < Size - 1; ++i){
-            if(board_state[i][i] != board_state[i+1][i+1])
-                test = false;
-        }
-    if (test == true && (board_state[0][0] == 'X'))
-        return -10;
-    if (test == true && (board_state[0][0] == 'O'))
-        return 10;
-    test = true;
 
     /* Sprawdzanie przeciwprzekątnej */
-    for (unsigned int i = 0; i < Size - 1; ++i){
-        if(board_state[Size - 1 - i][i] != board_state[Size - 2 - i][i+1])
-            test = false;
+    for(unsigned k = 0; k < (Size - streak + 1); ++k){
+        for (unsigned int i = 0; i < streak - 1; ++i){
+            if(board_state[Size - 1 - i - k ][i+k] != board_state[Size - 2 - i - k][i+1+k]){
+                test = false;
+                break;
+            }
+        }
+        if (test == true && (board_state[Size - 1 - k ][k] == 'X'))
+            return -10;
+        if (test == true && (board_state[Size - 1 - k ][k] == 'O'))
+            return 10;
+        test = true;
     }
-    if (test == true && (board_state[0][Size-1] == 'X'))
-        return -10;
-    if (test == true && (board_state[0][Size - 1] == 'O'))
-        return 10;
-    test = true;
 
     return 0;
 }
