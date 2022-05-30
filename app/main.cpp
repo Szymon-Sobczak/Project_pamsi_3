@@ -74,14 +74,12 @@ int main(){
 
          // ai_move = TicTacToe.FindBestMove();
          // TicTacToe.PutChar(ai_move.first, ai_move.second, 'O');
-         //TicTacToe.PutChar(0, 0, 'X');
-         //TicTacToe.PutChar(2, 1, 'X');
+
+         TicTacToe.PutChar(3, 0, 'X');
+         TicTacToe.PutChar(2, 1, 'X');
          TicTacToe.PutChar(1, 2, 'X');
-          TicTacToe.PutChar(2, 1, 'X');
-         TicTacToe.PutChar(0, 3, 'X');
-          TicTacToe.PutChar(3, 0, 'X');
-         // TicTacToe.PutChar(1, 2, 'X');
-        // TicTacToe.PutChar(1, 3, 'X');
+           TicTacToe.PutChar(0, 3, 'X');
+         // TicTacToe.PutChar(3, 3, 'X');
 
          TicTacToe.PrintState();;
          //system("clear"); 

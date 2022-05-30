@@ -80,31 +80,36 @@ int Board::EvaluateMove(){
         }
     }
     /* Sprawdzanie przekątnej */
-    for(unsigned k = 0; k < (Size - streak + 1); ++k){
-        for (unsigned int i = 0; i < streak - 1; ++i){
-                if(board_state[i+k][i+k] != board_state[i+1+k][i+1+k])
-                    test = false;
+    for(unsigned int x = 0; x < Size - streak + 1 ; ++x){
+        for(unsigned int y = 0; y < Size - streak + 1; ++y){
+            for (unsigned int i = 0; i < streak - 1; ++i){
+                    if(board_state[x+i][y+i] != board_state[x+i+1][y+i+1]){
+                        test = false;
+                        break;
+                    }  
             }
-        if (test == true && (board_state[k][k] == 'X'))
-            return -10;
-        if (test == true && (board_state[k][k] == 'O'))
-            return 10;
-        test = true;
-    }
-
-    /* Sprawdzanie przeciwprzekątnej */
-    for(unsigned k = 0; k < (Size - streak + 1); ++k){
-        for (unsigned int i = 0; i < streak - 1; ++i){
-            if(board_state[Size - 1 - i - k ][i+k] != board_state[Size - 2 - i - k][i+1+k]){
-                test = false;
-                break;
-            }
+            if (test == true && (board_state[x][y] == 'X'))
+                return -10;
+            if (test == true && (board_state[x][y] == 'O'))
+                return 10;
+            test = true;
         }
-        if (test == true && (board_state[Size - 1 - k ][k] == 'X'))
-            return -10;
-        if (test == true && (board_state[Size - 1 - k ][k] == 'O'))
-            return 10;
-        test = true;
+    }
+    /* Sprawdzanie przeciwprzekątnej */
+    for(unsigned int x = streak - 1; x < Size; ++x){
+        for(unsigned int y = 0; y < Size - streak + 1; ++y){
+            for (unsigned int i = 0; i < streak - 1; ++i){
+                if(board_state[x - i][y + i] != board_state[x - 1 - i][y + i + 1]){
+                        test = false;
+                        break;
+                    }
+            }
+            if (test == true && (board_state[x][y] == 'X'))
+                return -10;
+            if (test == true && (board_state[x][y] == 'O'))
+                return 10;
+            test = true;
+        }
     }
 
     return 0;
