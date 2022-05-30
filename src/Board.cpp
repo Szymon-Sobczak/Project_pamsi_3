@@ -49,13 +49,14 @@ bool Board::IsSpaceAvailable(){
 
 int Board::EvaluateMove(){
     bool test = true;
-    
     /* Sprawdzanie wierszy */
     for(unsigned k = 0; k < (Size - streak + 1); ++k){
         for (unsigned int i = 0; i < Size; ++i){
             for (unsigned int j = 0; j < streak - 1; ++j){
-                if(board_state[i][j+k] != board_state[i][j+k+1])
+                if(board_state[i][j+k] != board_state[i][j+k+1]){
                     test = false;
+                    break;
+                }
             }
             if (test == true && (board_state[i][k] == 'X'))
                 return -10;
@@ -69,8 +70,10 @@ int Board::EvaluateMove(){
     for(unsigned k = 0; k < (Size - streak + 1); ++k){
         for (unsigned int i = 0; i < Size; ++i){
             for (unsigned int j = 0; j < streak - 1; ++j){
-                if(board_state[j+k][i] != board_state[j+k+1][i])
+                if(board_state[j+k][i] != board_state[j+k+1][i]){
                     test = false;
+                    break;
+                }   
             }
             if (test == true && (board_state[k][i] == 'X'))
                 return -10;
