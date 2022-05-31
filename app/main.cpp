@@ -1,10 +1,16 @@
 
+/* WYKONAŁ: Szymon Sobczak 259275 */
+
 #include "Board.hh"
+
+/* Główna pętla programu - Driver */
 int main(){
-   unsigned int game_size = 3, streak = 3;
+   unsigned int game_size = 4, streak = 3;
    unsigned int Col = 0, Row = 0;
    std::pair<int, int> ai_move = {0,0};
+   
    system("clear"); 
+
    // std::cout << "!!!   WELCOME TO THE GAME   !!!" << std::endl;
    // std::cout  <<" _____ ___ ___   _____ _   ___   _____ ___  ___ " << std::endl
    //            <<"|_   _|_ _/ __| |_   _/_| / __| |_   _| _ || __|" << std::endl
@@ -49,9 +55,10 @@ int main(){
    //          std::cin.ignore(10000,'\n'); 
    //          std::cerr << "! An error has occurred: " << std::endl << e.what() << std::endl;
    //    }
-   // }  
+   // }
+
    Board TicTacToe = Board(game_size, streak);
-  // system("clear");
+   system("clear");
    std::cout << "Let the game begin! You play X and the AI plays O." << std::endl;
    while (1){
       try{ 
@@ -68,6 +75,7 @@ int main(){
             std::cout << "--- TIE ---" << std::endl;
             break;
          }
+
          system("clear");
          TicTacToe.PrintState();;
        
@@ -78,6 +86,9 @@ int main(){
 
          ai_move = TicTacToe.FindBestMove();
          TicTacToe.PutChar(ai_move.first, ai_move.second, 'O');
+
+         system("clear");
+         TicTacToe.PrintState();;
 
          if (TicTacToe.EvaluateMove() == 10){
             std::cout << "XXX AI WON XXX" << std::endl;
