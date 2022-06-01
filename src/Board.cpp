@@ -1,4 +1,5 @@
 #include "Board.hh"
+
 /*
  *    Konstruktor klasy Board wraz z listą inicjalizacyjną. 
  */
@@ -142,7 +143,7 @@ int Board::MinMaxAlfaBeta(int depth, bool maximisation, int alpha, int beta){
     int score = EvaluateMove();
     
     /* Ograniczenie głębokości rekurencji algorytmu MinMax */
-    if(depth == 14 - int(size)){
+    if(depth == 7){
         if (maximisation)
             return score - depth;
         if (!maximisation)
