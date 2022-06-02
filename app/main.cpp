@@ -17,7 +17,7 @@ int main(){
               <<"  | |  | | (__    | |/ _|| (__    | | |(_)|| _| " << std::endl
               <<"  |_| |__ |___|   |_/_/ | |___|   |_| |___||___|" << std::endl << std::endl;
    while (1){ 
-      try{
+      try{ // Zabezpieczenie przed wpisaniem błędnych wartości romiaru planszy.
          std::cout << "Please specify the size of the board, it should be in the range [3;10] >>> ";
          std::cin >> game_size;
          
@@ -36,7 +36,7 @@ int main(){
             std::cerr << "! An error has occurred: " << std::endl << e.what() << std::endl;
       }
    }
-   while (1){ 
+   while (1){ // Zabezpieczenie przed wpisaniem błędnych wartości streak.
       try{
          std::cout << "Please specify the streak of characters required to win, it must be less than the size of the board and more than 1 >>> ";
          std::cin >> streak;
@@ -57,14 +57,15 @@ int main(){
       }
    }
 
-   Board TicTacToe = Board(game_size, streak);
+   Board TicTacToe = Board(game_size, streak); // Inicjalizacja gry.
+   
    system("clear");
    std::cout << "Let the game begin! You play X and the AI plays O." << std::endl;
    while (1){
       try{ 
          TicTacToe.PrintState();
          std::cout << "Enter positon Row, Col >>> ";
-         std::cin >> Col >> Row;
+         std::cin >> Col >> Row; // Wyprowadzenie ruchu gracza.
          if(std::cin.fail())
             throw std::invalid_argument("Typing error, please try again.");
          
@@ -83,7 +84,7 @@ int main(){
             break;
          }
 
-         ai_move = TicTacToe.FindBestMove();
+         ai_move = TicTacToe.FindBestMove(); // Wyprowadzenie ruchu gracza AI.
          TicTacToe.PutChar(ai_move.first, ai_move.second, 'O');
 
          system("clear");

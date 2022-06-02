@@ -143,7 +143,7 @@ int Board::MinMaxAlfaBeta(int depth, bool maximisation, int alpha, int beta){
     int score = EvaluateMove();
     
     /* Ograniczenie głębokości rekurencji algorytmu MinMax */
-    if(depth == 7){
+    if(depth == 14 - int(size)){
         if (maximisation)
             return score - depth;
         if (!maximisation)
